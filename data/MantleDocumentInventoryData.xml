@@ -95,74 +95,11 @@ along with this software (see the LICENSE.md file). If not, see
         <conditions conditionSeqId="01" fieldNameAlias="productId" operator="is-not-null" fieldValue=""/>
     </dataDocuments>
 
-    <!-- Production Run Estimate - Consume -->
-
-    <dataDocuments dataDocumentId="MantleInventoryRunConsume" indexName="mantle_inventory" documentName="RunConsume"
-            primaryEntityName="mantle.work.effort.WorkEffortProduct" documentTitle="${workEffortId}:${productId}">
-        <fields fieldSeqId="01" fieldPath="workEffortId"/>
-        <fields fieldSeqId="02" fieldPath="productId"/>
-        <fields fieldSeqId="03" fieldPath="estimatedQuantity" fieldNameAlias="estimatedConsumeQuantity"/>
-        <fields fieldSeqId="04" fieldPath="fromDate"/>
-        <fields fieldSeqId="05" fieldPath="thruDate"/>
-        <fields fieldSeqId="06" fieldPath="typeEnumId"/>
-    
-        <fields fieldSeqId="10" fieldPath="issuances:assetId" fieldNameAlias="assetId"/>
-        <fields fieldSeqId="11" fieldPath="issuances:issuedDate" fieldNameAlias="consumeDate"/>
-        <fields fieldSeqId="12" fieldPath="issuances:quantity" fieldNameAlias="consumeQuantity"/>
-    
-        <fields fieldSeqId="20" fieldPath="workEffort:statusId"/>
-        <fields fieldSeqId="21" fieldPath="workEffort:estimatedStartDate"/>
-        <fields fieldSeqId="22" fieldPath="workEffort:facilityId" fieldNameAlias="lineFacilityId"/>
-        <!-- the line's parent facility, the warehouse, is the main Facility we would filter/etc by -->
-        <fields fieldSeqId="23" fieldPath="workEffort:facility:parentFacilityId" fieldNameAlias="facilityId"/>
-    
-        <conditions conditionSeqId="01" fieldNameAlias="typeEnumId" fieldValue="WeptConsume"/>
-    </dataDocuments>
-
-    <!-- Production Run Estimate - Produce -->
-
-    <dataDocuments dataDocumentId="MantleInventoryRunProduce" indexName="mantle_inventory" documentName="RunProduce"
-            primaryEntityName="mantle.work.effort.WorkEffortProduct" documentTitle="${workEffortId}:${productId}">
-        <fields fieldSeqId="01" fieldPath="workEffortId"/>
-        <fields fieldSeqId="02" fieldPath="productId"/>
-        <fields fieldSeqId="03" fieldPath="estimatedQuantity" fieldNameAlias="estimatedProduceQuantity"/>
-        <fields fieldSeqId="04" fieldPath="fromDate"/>
-        <fields fieldSeqId="05" fieldPath="thruDate"/>
-        <fields fieldSeqId="06" fieldPath="typeEnumId"/>
-    
-        <fields fieldSeqId="10" fieldPath="receipts:assetId" fieldNameAlias="assetId"/>
-        <fields fieldSeqId="11" fieldPath="receipts:receivedDate" fieldNameAlias="produceDate"/>
-        <fields fieldSeqId="12" fieldPath="receipts:quantityAccepted" fieldNameAlias="produceQuantity"/>
-    
-        <fields fieldSeqId="20" fieldPath="workEffort:statusId"/>
-        <fields fieldSeqId="21" fieldPath="workEffort:estimatedStartDate"/>
-        <fields fieldSeqId="22" fieldPath="workEffort:facilityId" fieldNameAlias="lineFacilityId"/>
-        <!-- the line's parent facility, the warehouse, is the main Facility we would filter/etc by -->
-        <fields fieldSeqId="23" fieldPath="workEffort:facility:parentFacilityId" fieldNameAlias="facilityId"/>
-    
-        <conditions conditionSeqId="01" fieldNameAlias="typeEnumId" fieldValue="WeptProduce"/>
-    </dataDocuments>
-
-    <!-- Production Estimate -->
-
-    <dataDocuments dataDocumentId="MantleInventoryProdEstimate" indexName="mantle_inventory" documentName="ProductionEstimate"
-            primaryEntityName="mantle.work.estimate.ProductionEstimate" documentTitle="${productId}:${facilityId}:${readyDate}">
-        <fields fieldSeqId="01" fieldPath="productionEstimateId"/>
-        <fields fieldSeqId="02" fieldPath="productId"/>
-        <!-- use facilityId for the destination to match the field name used in other inventory documents, for filtering/etc -->
-        <fields fieldSeqId="03" fieldPath="destinationFacilityId" fieldNameAlias="facilityId"/>
-        <fields fieldSeqId="04" fieldPath="quantity" fieldNameAlias="prodEstQuantity"/>
-        <fields fieldSeqId="05" fieldPath="readyDate"/>
-    </dataDocuments>
-
     <!-- DataFeed -->
     <moqui.entity.feed.DataFeed dataFeedId="MantleInventoryData" dataFeedTypeEnumId="DTFDTP_RT_PUSH"
             feedName="Mantle Inventory Data" feedReceiveServiceName="org.moqui.search.SearchServices.index#DataDocuments"
             feedDeleteServiceName="org.moqui.search.SearchServices.delete#DataDocument">
         <documents dataDocumentId="MantleInventoryAsset"/>
         <documents dataDocumentId="MantleInventoryOrderItem"/>
-        <documents dataDocumentId="MantleInventoryRunConsume"/>
-        <documents dataDocumentId="MantleInventoryRunProduce"/>
-        <documents dataDocumentId="MantleInventoryProdEstimate"/>
     </moqui.entity.feed.DataFeed>
 </entity-facade-xml>

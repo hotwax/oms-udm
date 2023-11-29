@@ -20,7 +20,6 @@ along with this software (see the LICENSE.md file). If not, see
     <!--  - mantle.product.config -->
     <!--  - mantle.product.cost -->
     <!--  - mantle.product.feature -->
-    <!--  - mantle.product.subscription -->
     <!-- ========================================================= -->
 
     <!-- ========================================================= -->
@@ -94,11 +93,7 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="productId" related="toProductId"/></relationship>
         <relationship type="many" related="mantle.product.ProductContent" short-alias="contents">
             <key-map field-name="productId"/></relationship>
-        <relationship type="many" related="mantle.product.ProductDimension" short-alias="dimensions">
-            <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.ProductGeo" short-alias="geos">
-            <key-map field-name="productId"/></relationship>
-        <relationship type="many" related="mantle.product.ProductGlAppl" short-alias="glAppls">
             <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.ProductIdentification" short-alias="identifications">
             <key-map field-name="productId"/></relationship>
@@ -112,12 +107,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="many" related="mantle.product.category.ProductCategoryMember" short-alias="categories">
             <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.feature.ProductFeatureAppl" short-alias="features">
-            <key-map field-name="productId"/></relationship>
-        <relationship type="many" related="mantle.product.maintenance.ProductMaintenance" short-alias="maintenances">
-            <key-map field-name="productId"/></relationship>
-        <relationship type="many" related="mantle.product.maintenance.ProductMeter" short-alias="meters">
-            <key-map field-name="productId"/></relationship>
-        <relationship type="many" related="mantle.product.subscription.ProductSubscriptionResource" short-alias="subscriptionResources">
             <key-map field-name="productId"/></relationship>
 
         <relationship type="many" related="mantle.product.asset.Asset" short-alias="assets">
@@ -203,14 +192,11 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="quantity" type="number-decimal"/>
         <field name="scrapFactor" type="number-decimal"/>
         <field name="instruction" type="text-medium"/>
-        <field name="routingWorkEffortId" type="id"/>
         <relationship type="one" title="ProductAssocType" related="moqui.basic.Enumeration" short-alias="type">
             <key-map field-name="productAssocTypeEnumId"/></relationship>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" title="To" related="mantle.product.Product" short-alias="toProduct">
             <key-map field-name="toProductId"/></relationship>
-        <relationship type="one" title="Routing" related="mantle.work.effort.WorkEffort" short-alias="routing">
-            <key-map field-name="routingWorkEffortId"/></relationship>
         <seed-data>
             <!-- Product Assoc Type -->
             <moqui.basic.EnumerationType description="Product Association Type" enumTypeId="ProductAssocType"/>
@@ -262,13 +248,13 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="productContentTypeEnumId"/></relationship>
     </entity>
     <!-- TODO: deprecate by ProductClassUomDimension, will require data migration -->
-    <entity entity-name="ProductClassDimension" package="mantle.product">
+    <!--<entity entity-name="ProductClassDimension" package="mantle.product">
         <field name="productClassEnumId" type="id" is-pk="true"/>
         <field name="dimensionTypeId" type="id" is-pk="true"/>
         <relationship type="one" title="ProductClass" related="moqui.basic.Enumeration">
             <key-map field-name="productClassEnumId"/></relationship>
         <relationship type="one" related="mantle.product.ProductDimensionType"/>
-    </entity>
+    </entity>-->
     <entity entity-name="ProductClassUomDimension" package="mantle.product">
         <field name="productClassEnumId" type="id" is-pk="true"/>
         <field name="uomDimensionTypeId" type="id" is-pk="true"/>
@@ -363,13 +349,11 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="productFormTypeEnumId" type="id"/>
         <field name="sequenceNum" type="number-integer"/>
         <field name="roleTypeId" type="id"/>
-        <field name="marketSegmentId" type="id"/>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" related="moqui.screen.form.DbForm" short-alias="dbForm"/>
         <relationship type="one" title="ProductFormType" related="moqui.basic.Enumeration" short-alias="productFormTypeEnum">
             <key-map field-name="productFormTypeEnumId" related="enumId"/></relationship>
         <relationship type="one" related="mantle.party.RoleType" short-alias="role"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <seed-data>
             <moqui.basic.EnumerationType description="Product Form Type" enumTypeId="ProductFormType"/>
             <moqui.basic.Enumeration description="Sales Required Info" enumId="PfmtSalesRequired" enumTypeId="ProductFormType"/>
@@ -379,7 +363,7 @@ along with this software (see the LICENSE.md file). If not, see
     </entity>
 
     <!-- TODO: deprecate by ProductUomDimension, will require data migration -->
-    <entity entity-name="ProductDimension" package="mantle.product">
+    <!--<entity entity-name="ProductDimension" package="mantle.product">
         <description>WARNING: to be deprecated by mantle.product.ProductUomDimension</description>
         <field name="productId" type="id" is-pk="true"/>
         <field name="dimensionTypeId" type="id" is-pk="true"/>
@@ -389,9 +373,9 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.product.ProductDimensionType" short-alias="type"/>
         <relationship type="one" title="Value" related="moqui.basic.Uom" short-alias="valueUom">
             <key-map field-name="valueUomId"/></relationship>
-    </entity>
-    <!-- TODO: deprecate by moqui.basic.UomDimensionType, will require data migration -->
-    <entity entity-name="ProductDimensionType" package="mantle.product">
+    </entity>-->
+    <!-- TODO: deprecate by moqui.basic. , will require data migration -->
+    <!--<entity entity-name="ProductDimensionType" package="mantle.product">
         <description>WARNING: to be deprecated by moqui.basic.UomDimensionType</description>
         <field name="dimensionTypeId" type="id" is-pk="true"/>
         <field name="description" type="text-medium"/>
@@ -415,17 +399,15 @@ along with this software (see the LICENSE.md file). If not, see
             <mantle.product.ProductDimensionType description="Shipping Depth" dimensionTypeId="ShippingDepth" uomTypeEnumId="UT_LENGTH_MEASURE"/>
             <mantle.product.ProductDimensionType description="Diameter" dimensionTypeId="Diameter" uomTypeEnumId="UT_LENGTH_MEASURE"/>
         </seed-data>
-    </entity>
+    </entity>-->
     <entity entity-name="ProductUomDimension" package="mantle.product">
         <field name="productUomDimensionId" type="id" is-pk="true"/>
         <field name="productId" type="id" not-null="true"/>
         <field name="uomDimensionTypeId" type="id"/>
-        <field name="marketSegmentId" type="id"/>
         <field name="value" type="number-decimal"/>
         <field name="uomId" type="id"/>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" related="moqui.basic.UomDimensionType" short-alias="type"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <relationship type="one" related="moqui.basic.Uom" short-alias="uom"/>
     </entity>
 
@@ -446,13 +428,6 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Shipment Include" enumId="PgpShipmentInclude" enumTypeId="ProductGeoPurpose"/>
             <moqui.basic.Enumeration description="Shipment Exclude" enumId="PgpShipmentExclude" enumTypeId="ProductGeoPurpose"/>
         </seed-data>
-    </entity>
-    <entity entity-name="ProductGlAppl" package="mantle.product">
-        <description>Used to specify relevant GL Accounts for a Product (expense, revenue, etc); not related to posting conf</description>
-        <field name="productId" type="id" is-pk="true"/>
-        <field name="glAccountId" type="id" is-pk="true"/>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
-        <relationship type="one" related="mantle.ledger.account.GlAccount" short-alias="glAccount"/>
     </entity>
     <entity entity-name="ProductIdentification" package="mantle.product">
         <field name="productId" type="id" is-pk="true"/>
@@ -485,7 +460,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="productId" type="id"/>
         <field name="productStoreId" type="id"/>
         <field name="productIdTypeEnumId" type="id"/>
-        <field name="marketSegmentId" type="id"/>
         <field name="parentProductId" type="id"/>
         <field name="idValue" type="text-medium"/>
 
@@ -493,7 +467,6 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="productIdTypeEnumId"/></relationship>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
         <relationship type="one" related="mantle.product.store.ProductStore" short-alias="productStore"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <relationship type="one" title="Parent" related="mantle.product.Product" short-alias="parentProduct">
             <key-map field-name="parentProductId" related="productId"/></relationship>
         <index name="PRODUCT_STR_ID_VAL" unique="false"><index-field name="idValue"/></index>
@@ -520,7 +493,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="productParameterOptionId" type="id" is-pk="true"/>
         <field name="productParameterId" type="id" not-null="true"/>
         <field name="productId" type="id"><description>Optional, if null option applies to all products that use the ProductParameter</description></field>
-        <field name="marketSegmentId" type="id"/>
         <field name="productStoreId" type="id"/>
         <field name="productUomDimensionId" type="id"><description>For options associated with a ProductUomDimension</description></field>
         <field name="productOtherIdentId" type="id"><description>For options associated with a ProductOtherIdentification</description></field>
@@ -528,7 +500,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="sequenceNum" type="number-integer"/>
         <relationship type="one" related="mantle.product.ProductParameter" short-alias="productParameter"/>
         <relationship type="one" related="mantle.product.Product" short-alias="product"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <relationship type="one" related="mantle.product.store.ProductStore" short-alias="productStore"/>
         <relationship type="one" related="mantle.product.ProductUomDimension" short-alias="productUomDimension"/>
         <relationship type="one" related="mantle.product.ProductOtherIdentification" short-alias="productOtherIdent"/>
@@ -554,7 +525,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="parameterValue" type="text-medium"/>
         <field name="uomId" type="id"/>
         <relationship type="one" related="mantle.product.ProductParameterSet" short-alias="productParameterSet"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <relationship type="one" related="mantle.product.ProductParameter" short-alias="productParameter"/>
         <relationship type="one" related="mantle.product.ProductParameterOption" short-alias="productParameterOption"/>
         <relationship type="one" related="moqui.basic.Uom" short-alias="uom"/>
@@ -601,11 +571,6 @@ along with this software (see the LICENSE.md file). If not, see
             taxAuthorityId at the taxPercentage.</description></field>
         <field name="taxAmount" type="currency-precise"/>
         <field name="taxPercentage" type="number-decimal"/>
-        <field name="taxAuthorityId" type="id"/>
-
-        <field name="agreementId" type="id"/>
-        <field name="agreementItemSeqId" type="id"><description>Use along with agreementId to associate the price with
-            an AgreementItem.</description></field>
 
         <field name="otherPartyItemName" type="text-medium"/>
         <field name="otherPartyItemId" type="text-short"/>
@@ -630,7 +595,6 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" title="Term" related="moqui.basic.Uom" short-alias="termUom">
             <key-map field-name="termUomId"/></relationship>
         <relationship type="one" related="mantle.product.store.ProductStore" short-alias="store"/>
-        <relationship type="one" related="mantle.other.tax.TaxAuthority" short-alias="taxAuthority"/>
 
         <relationship type="one" title="SupplierPreferredOrder" related="moqui.basic.Enumeration" short-alias="supplierOrder">
             <key-map field-name="preferredOrderEnumId"/></relationship>
@@ -681,46 +645,6 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="parameterName" type="text-short" is-pk="true"/>
         <field name="parameterValue" type="text-medium"/>
         <relationship type="one" related="mantle.product.ProductPriceModify" short-alias="priceModify"/>
-    </entity>
-    <entity entity-name="ProductReview" package="mantle.product" cache="never">
-        <field name="productReviewId" type="id" is-pk="true"/>
-        <field name="productStoreId" type="id"/>
-        <field name="productId" type="id"/>
-        <field name="userId" type="id"/>
-        <field name="statusId" type="id" enable-audit-log="true"/>
-        <field name="postedAnonymous" type="text-indicator"/>
-        <field name="postedDateTime" type="date-time"/>
-        <field name="productRating" type="number-decimal"/>
-        <field name="productReview" type="text-very-long"/>
-        <relationship type="one" related="mantle.product.store.ProductStore"/>
-        <relationship type="one" related="mantle.product.Product"/>
-        <relationship type="one" related="moqui.security.UserAccount"/>
-        <relationship type="one" title="ProductReview" related="moqui.basic.StatusItem"/>
-        <seed-data>
-            <!-- Product Review Status -->
-            <moqui.basic.StatusType description="Product Review" statusTypeId="ProductReview"/>
-            <moqui.basic.StatusItem description="Pending" sequenceNum="1" statusId="PrvwPending" statusTypeId="ProductReview"/>
-            <moqui.basic.StatusItem description="Approved" sequenceNum="2" statusId="PrvwApproved" statusTypeId="ProductReview"/>
-            <moqui.basic.StatusItem description="Deleted" sequenceNum="99" statusId="PrvwDeleted" statusTypeId="ProductReview"/>
-            <moqui.basic.StatusFlowTransition statusFlowId="Default" statusId="PrvwPending" toStatusId="PrvwApproved" transitionName="Review Approved"/>
-            <moqui.basic.StatusFlowTransition statusFlowId="Default" statusId="PrvwPending" toStatusId="PrvwDeleted" transitionName="Review Deleted"/>
-            <moqui.basic.StatusFlowTransition statusFlowId="Default" statusId="PrvwApproved" toStatusId="PrvwDeleted" transitionName="Review Deleted"/>
-        </seed-data>
-    </entity>
-    <entity entity-name="ProductWorkEffort" package="mantle.product">
-        <description>Configure tasks (WorkEffort) that will be cloned when Product is ordered and associated with OrderItem using OrderItemWorkEffort.</description>
-        <field name="productId" type="id" is-pk="true"/>
-        <field name="workEffortId" type="id" is-pk="true"/>
-        <field name="fromDate" type="date-time" is-pk="true"/>
-        <field name="thruDate" type="date-time"/>
-        <field name="requiredWork" type="text-indicator">
-            <description>If Y require WorkEffort Status of Complete, Closed, or Cancelled to consider OrderItem fulfilled</description></field>
-        <field name="forStatusId" type="id">
-            <description>Task must be Complete or Closed before change to this status (soft rule, depending on code in place)</description></field>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
-        <relationship type="one" related="mantle.work.effort.WorkEffort" short-alias="workEffort"/>
-        <relationship type="one" title="OrderHeader" related="moqui.basic.StatusItem" short-alias="forStatus">
-            <key-map field-name="forStatusId"/></relationship>
     </entity>
 
     <!-- ========================================================= -->
@@ -833,13 +757,11 @@ along with this software (see the LICENSE.md file). If not, see
         <field name="productCategoryId" type="id"/>
         <field name="identTypeEnumId" type="id"/>
         <field name="productStoreId" type="id"/>
-        <field name="marketSegmentId" type="id"/>
         <field name="idValue" type="text-medium"/>
         <relationship type="one" title="ProductCategoryIdentType" related="moqui.basic.Enumeration" short-alias="type">
             <key-map field-name="identTypeEnumId"/></relationship>
         <relationship type="one" related="mantle.product.category.ProductCategory" short-alias="productCategory"/>
         <relationship type="one" related="mantle.product.store.ProductStore" short-alias="productStore"/>
-        <relationship type="one" related="mantle.marketing.segment.MarketSegment" short-alias="marketSegment"/>
         <index name="PRODUCT_CAT_STR_ID_VAL" unique="false"><index-field name="idValue"/></index>
         <seed-data>
             <!-- Product Category Ident Type -->
@@ -1253,133 +1175,5 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Incompatible" enumId="PfitIncompatible" enumTypeId="ProductFeatureIactnType"/>
             <moqui.basic.Enumeration description="Composition" enumId="PfitComposition" enumTypeId="ProductFeatureIactnType"/>
         </seed-data>
-    </entity>
-
-    <!-- ========================================================= -->
-    <!-- mantle.product.subscription -->
-    <!-- ========================================================= -->
-
-    <entity entity-name="ProductSubscriptionResource" package="mantle.product.subscription">
-        <field name="productId" type="id" is-pk="true"/>
-        <field name="subscriptionResourceId" type="id" is-pk="true"/>
-        <field name="fromDate" type="date-time" is-pk="true"/>
-        <field name="thruDate" type="date-time"/>
-        <field name="purchaseFromDate" type="date-time"/>
-        <field name="purchaseThruDate" type="date-time"/>
-        <field name="availableTime" type="number-integer"/>
-        <field name="availableTimeUomId" type="id"/>
-        <field name="useCountLimit" type="number-integer"/>
-        <field name="useTime" type="number-integer"/>
-        <field name="useTimeUomId" type="id"/>
-        <field name="useRoleTypeId" type="id"/>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
-        <relationship type="one" related="mantle.product.subscription.SubscriptionResource" short-alias="resource"/>
-        <relationship type="one" title="Use" related="mantle.party.RoleType" short-alias="useRole">
-            <key-map field-name="useRoleTypeId"/></relationship>
-        <relationship type="one" title="UseTime" related="moqui.basic.Uom" short-alias="useTimeUom">
-            <key-map field-name="useTimeUomId"/></relationship>
-        <relationship type="one" title="AvailableTime" related="moqui.basic.Uom" short-alias="availableTimeUom">
-            <key-map field-name="availableTimeUomId"/></relationship>
-    </entity>
-    <entity entity-name="Subscription" package="mantle.product.subscription" short-alias="subscriptions" cache="never">
-        <field name="subscriptionId" type="id" is-pk="true"/>
-        <field name="subscriptionTypeEnumId" type="id"/>
-        <field name="subscriptionResourceId" type="id"/>
-        <field name="subscriberPartyId" type="id"/>
-        <field name="deliverToContactMechId" type="id"/>
-
-        <field name="orderId" type="id"/>
-        <field name="orderItemSeqId" type="id"/>
-        <field name="productId" type="id"/>
-        <field name="externalSubscriptionId" type="text-short"/>
-        <field name="resourceInstanceId" type="text-short"><description>ID of an instance of a resource, like a serial
-            number or executing instance ID.</description></field>
-        <field name="description" type="text-medium"/>
-
-        <field name="fromDate" type="date-time"/>
-        <field name="thruDate" type="date-time"/>
-        <field name="purchaseFromDate" type="date-time"/>
-        <field name="purchaseThruDate" type="date-time"/>
-
-        <field name="availableTime" type="number-integer"/>
-        <field name="availableTimeUomId" type="id"/>
-        <field name="useTime" type="number-integer"/>
-        <field name="useTimeUomId" type="id"/>
-        <field name="useCountLimit" type="number-integer"/>
-        <relationship type="one" title="SubscriptionType" related="moqui.basic.Enumeration" short-alias="type">
-            <key-map field-name="subscriptionTypeEnumId"/></relationship>
-        <relationship type="one" related="mantle.product.subscription.SubscriptionResource" short-alias="resource">
-            <key-map field-name="subscriptionResourceId"/></relationship>
-        <relationship type="one" title="Subscriber" related="mantle.party.Party" short-alias="subscriber">
-            <key-map field-name="subscriberPartyId"/></relationship>
-        <relationship type="one" title="DeliverTo" related="mantle.party.contact.ContactMech" short-alias="deliverTo">
-            <key-map field-name="deliverToContactMechId"/></relationship>
-        <relationship type="one" related="mantle.order.OrderItem" short-alias="orderItem">
-            <key-map field-name="orderId"/><key-map field-name="orderItemSeqId"/></relationship>
-        <relationship type="one" related="mantle.product.Product" short-alias="product"/>
-        <relationship type="one" title="AvailableTime" related="moqui.basic.Uom" short-alias="availableTimeUom">
-            <key-map field-name="availableTimeUomId"/></relationship>
-        <relationship type="one" title="UseTime" related="moqui.basic.Uom" short-alias="useTimeUom">
-            <key-map field-name="useTimeUomId"/></relationship>
-        <seed-data>
-            <!-- Product Subscription Type -->
-            <moqui.basic.EnumerationType description="Subscription Type" enumTypeId="SubscriptionType"/>
-            <moqui.basic.Enumeration description="Product" enumId="StProduct" enumTypeId="SubscriptionType"/>
-        </seed-data>
-        <master>
-            <detail relationship="type"/>
-            <detail relationship="resource"/>
-            <detail relationship="subscriber" use-master="basic"/>
-            <detail relationship="deliverTo" use-master="default"/>
-            <detail relationship="product"/>
-            <detail relationship="availableTimeUom"/>
-            <detail relationship="useTimeUom"/>
-        </master>
-    </entity>
-    <entity entity-name="SubscriptionDelivery" package="mantle.product.subscription" cache="never">
-        <field name="subscriptionId" type="id" is-pk="true"/>
-        <field name="dateSent" type="date-time" is-pk="true"/>
-        <field name="communicationEventId" type="id"/>
-        <field name="comments" type="text-medium"/>
-        <relationship type="one" related="mantle.product.subscription.Subscription"/>
-        <relationship type="one" related="mantle.party.communication.CommunicationEvent"/>
-    </entity>
-    <entity entity-name="SubscriptionResource" package="mantle.product.subscription" short-alias="subscriptionResources">
-        <field name="subscriptionResourceId" type="id" is-pk="true"/>
-        <field name="parentResourceId" type="id"/>
-        <field name="description" type="text-medium"/>
-        <field name="contentLocation" type="text-medium"/>
-        <field name="remoteResourceId" type="text-medium"/>
-
-        <field name="initServiceName" type="text-medium">
-            <description>Service called when a new subscription to a resource begins. Must implement the
-                mantle.product.SubscriptionServices.init#SubscriptionResource service interface.</description></field>
-        <field name="renewServiceName" type="text-medium">
-            <description>Service called when an existing subscription is renewed. Can be empty or do nothing, using
-                revoke after expire instead. Must implement the mantle.product.SubscriptionServices.renew#SubscriptionResource
-                service interface.</description></field>
-        <field name="revokeAccessTime" type="number-integer"/>
-        <field name="revokeAccessTimeUomId" type="id"/>
-        <field name="revokeAccessServiceName" type="text-medium">
-            <description>Service called when inactive subscription goes past revokeAccessTime. Must implement the
-                mantle.product.SubscriptionServices.revoke#SubscriptionResourceAccess service interface.</description></field>
-        <field name="restoreAccessServiceName" type="text-medium">
-            <description>Service called on special events (manual or otherwise) to resore access. Must implement the
-                mantle.product.SubscriptionServices.restore#SubscriptionResourceAccess service interface.</description></field>
-        <field name="destroyTime" type="number-integer"/>
-        <field name="destroyTimeUomId" type="id"/>
-        <field name="destroyServiceName" type="text-medium">
-            <description>Service called when inactive subscription goes past destroyTime. Must implement the
-                mantle.product.SubscriptionServices.destroy#SubscriptionResource service interface.</description></field>
-
-        <relationship type="one" title="Parent" related="mantle.product.subscription.SubscriptionResource" short-alias="parent">
-            <key-map field-name="parentResourceId" related="subscriptionResourceId"/></relationship>
-        <relationship type="many" related="mantle.product.subscription.ProductSubscriptionResource" short-alias="products">
-            <key-map field-name="subscriptionResourceId"/></relationship>
-
-        <master>
-            <detail relationship="parent"/>
-            <detail relationship="products"><detail relationship="product"/></detail>
-        </master>
     </entity>
 </entities>
