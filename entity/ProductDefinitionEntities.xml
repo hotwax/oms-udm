@@ -95,6 +95,8 @@ along with this software (see the LICENSE.md file). If not, see
             <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.ProductGeo" short-alias="geos">
             <key-map field-name="productId"/></relationship>
+        <relationship type="many" related="mantle.product.ProductDimension" short-alias="dimensions">
+            <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.ProductIdentification" short-alias="identifications">
             <key-map field-name="productId"/></relationship>
         <relationship type="many" related="mantle.product.ProductOtherIdentification" short-alias="otherIdentifications">
@@ -363,7 +365,7 @@ along with this software (see the LICENSE.md file). If not, see
     </entity>
 
     <!-- TODO: deprecate by ProductUomDimension, will require data migration -->
-    <!--<entity entity-name="ProductDimension" package="mantle.product">
+    <entity entity-name="ProductDimension" package="mantle.product">
         <description>WARNING: to be deprecated by mantle.product.ProductUomDimension</description>
         <field name="productId" type="id" is-pk="true"/>
         <field name="dimensionTypeId" type="id" is-pk="true"/>
@@ -373,9 +375,9 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.product.ProductDimensionType" short-alias="type"/>
         <relationship type="one" title="Value" related="moqui.basic.Uom" short-alias="valueUom">
             <key-map field-name="valueUomId"/></relationship>
-    </entity>-->
-    <!-- TODO: deprecate by moqui.basic. , will require data migration -->
-    <!--<entity entity-name="ProductDimensionType" package="mantle.product">
+    </entity>
+    <!-- TODO: deprecate by moqui.basic.UomDimensionType , will require data migration -->
+    <entity entity-name="ProductDimensionType" package="mantle.product">
         <description>WARNING: to be deprecated by moqui.basic.UomDimensionType</description>
         <field name="dimensionTypeId" type="id" is-pk="true"/>
         <field name="description" type="text-medium"/>
@@ -399,7 +401,7 @@ along with this software (see the LICENSE.md file). If not, see
             <mantle.product.ProductDimensionType description="Shipping Depth" dimensionTypeId="ShippingDepth" uomTypeEnumId="UT_LENGTH_MEASURE"/>
             <mantle.product.ProductDimensionType description="Diameter" dimensionTypeId="Diameter" uomTypeEnumId="UT_LENGTH_MEASURE"/>
         </seed-data>
-    </entity>-->
+    </entity>
     <entity entity-name="ProductUomDimension" package="mantle.product">
         <field name="productUomDimensionId" type="id" is-pk="true"/>
         <field name="productId" type="id" not-null="true"/>

@@ -52,8 +52,8 @@ along with this software (see the LICENSE.md file). If not, see
 
         <relationship type="one-nofk" related="mantle.party.Organization" short-alias="organization" mutable="true"/>
         <relationship type="one-nofk" related="mantle.party.Person" short-alias="person" mutable="true"/>
-        <relationship type="many" related="mantle.party.PartyBadge" short-alias="badges">
-            <key-map field-name="partyId"/></relationship>
+        <!--<relationship type="many" related="mantle.party.PartyBadge" short-alias="badges">
+            <key-map field-name="partyId"/></relationship>-->
         <relationship type="many" related="mantle.party.PartyClassificationAppl" short-alias="classifications">
             <key-map field-name="partyId"/></relationship>
         <relationship type="many" related="mantle.party.PartyContent" short-alias="contents">
@@ -98,7 +98,7 @@ along with this software (see the LICENSE.md file). If not, see
             <detail relationship="organization"/>
             <detail relationship="person"/>
             <!-- TODO: do something with UserAccount, exclude certain fields like PW/etc? -->
-            <detail relationship="badges"/>
+<!--            <detail relationship="badges"/>-->
             <detail relationship="classifications">
                 <detail relationship="classification"><detail relationship="type"/></detail>
             </detail>
@@ -215,7 +215,7 @@ along with this software (see the LICENSE.md file). If not, see
         <relationship type="one" related="mantle.party.Party"/>
     </extend-entity>
 
-    <entity entity-name="PartyBadge" package="mantle.party">
+    <!--<entity entity-name="PartyBadge" package="mantle.party">
         <field name="partyBadgeId" type="id" is-pk="true"/>
         <field name="partyId" type="id"/>
         <field name="organizationPartyId" type="id"/>
@@ -254,7 +254,7 @@ along with this software (see the LICENSE.md file). If not, see
             <moqui.basic.Enumeration description="Not Yet Valid" enumId="PbsrNotYetValid" enumTypeId="PartyBadgeScanResult"/>
             <moqui.basic.Enumeration description="Expired" enumId="PbsrExpired" enumTypeId="PartyBadgeScanResult"/>
         </seed-data>
-    </entity>
+    </entity>-->
     <entity entity-name="PartyClassification" package="mantle.party" cache="true">
         <field name="partyClassificationId" type="id" is-pk="true"/>
         <field name="classificationTypeEnumId" type="id"/>
@@ -790,9 +790,9 @@ along with this software (see the LICENSE.md file). If not, see
                 <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
             <!-- PaymentMethod vault gateway - setting type per org for payment gateway config to use by default for CC vault -->
             <!-- Support required for each payment gateway integration, org partyId is: PaymentMethod.ownerPartyId => Payment.ownerPartyId -->
-            <mantle.party.PartySettingType partySettingTypeId="VaultPaymentGatewayConfigId" description="Vault Payment Gateway Config ID">
+            <!--<mantle.party.PartySettingType partySettingTypeId="VaultPaymentGatewayConfigId" description="Vault Payment Gateway Config ID">
                 <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
-
+-->
             <!-- Print/PDF Template Location Settings -->
             <mantle.party.PartySettingType partySettingTypeId="OrgTemplateShipmentInsert" description="Template Location Shipment Insert">
                 <roles roleTypeId="OrgInternal"/></mantle.party.PartySettingType>
@@ -976,7 +976,8 @@ along with this software (see the LICENSE.md file). If not, see
             <detail relationship="fromContactMech"/><detail relationship="toContactMech"/>
             <detail relationship="fromParty"/><detail relationship="fromRole"/>
             <detail relationship="toParty"/><detail relationship="toRole"/>
-            <detail relationship="contactList"/><detail relationship="reason"/>
+<!--            <detail relationship="contactList"/>-->
+            <detail relationship="reason"/>
 
             <detail relationship="contents"/>
             <detail relationship="parties">

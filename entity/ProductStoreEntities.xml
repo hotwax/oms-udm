@@ -129,15 +129,15 @@ along with this software (see the LICENSE.md file). If not, see
             <detail relationship="assetReservationOrder"/>
             <detail relationship="defaultCurrencyUom"/>
             <detail relationship="defaultSalesChannel"/>
-            <detail relationship="taxGatewayConfig"/>
+<!--            <detail relationship="taxGatewayConfig"/>-->
 
             <detail relationship="categories"><detail relationship="category"/><detail relationship="type"/></detail>
             <detail relationship="emails"><detail relationship="template"/><detail relationship="type"/></detail>
             <detail relationship="facilities"><detail relationship="facility"/></detail>
             <detail relationship="parties"><detail relationship="party" use-master="basic"/>
                 <detail relationship="role"/></detail>
-            <detail relationship="paymentGateways"><detail relationship="paymentInstrument"/>
-                <detail relationship="config"/></detail>
+            <!--<detail relationship="paymentGateways"><detail relationship="paymentInstrument"/>
+                <detail relationship="config"/></detail>-->
             <detail relationship="shippingGateways"><detail relationship="carrier" use-master="basic"/>
                 <detail relationship="config"/></detail>
             <detail relationship="groups"><detail relationship="group"/></detail>
